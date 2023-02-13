@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: habit
+  profiles:
+    active: dev
+
+springdoc:
+  swagger-ui:
+    path: /api
+  writer-with-default-pretty-printer: true
