@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://home.jeson.im:23306/ptools?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://home.jeson.im:23306/habit?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: Jeson@123
 

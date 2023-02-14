@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.habit.mapper.RoomMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.habit.entity.Room">
+            <id property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="descr" column="descr" jdbcType="VARCHAR"/>
+            <result property="psasword" column="psasword" jdbcType="VARCHAR"/>
+            <result property="userList" column="user_list" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,name,descr,
+        psasword,user_list
+    </sql>
+</mapper>
