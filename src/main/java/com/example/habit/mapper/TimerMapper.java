@@ -1,4 +1,6 @@
 package com.example.habit.mapper;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.habit.entity.Timer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TimerMapper extends BaseMapper<Timer> {
 
+    List<Timer> selectByUserId(@Param("userId") Long userId);
 }

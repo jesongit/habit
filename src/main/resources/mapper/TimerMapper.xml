@@ -15,4 +15,11 @@
         uid,user_id,start_time,
         duration
     </sql>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_timer
+        where
+        user_id = #{userId}
+    </select>
 </mapper>

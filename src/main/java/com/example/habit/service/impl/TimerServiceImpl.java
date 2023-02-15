@@ -6,6 +6,8 @@ import com.example.habit.service.TimerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 计时器表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TimerServiceImpl extends ServiceImpl<TimerMapper, Timer> implements TimerService {
 
+    @Override
+    public List<Timer> getTimerList(Long userId) {
+        return baseMapper.selectByUserId(userId);
+    }
 }

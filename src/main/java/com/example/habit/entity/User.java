@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -19,13 +20,14 @@ import lombok.Data;
  * @since 2023-02-14
  */
 @Data
+@NoArgsConstructor
 @TableName("t_user")
-@Schema(name = "User", description = "$!{table.comment}")
+@Schema(name = "User", description = "用户")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户表")
+    @Schema(description = "用户id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 

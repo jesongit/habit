@@ -4,8 +4,8 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.example.habit.common.Utils;
-import com.example.habit.dto.UserInfo;
-import com.example.habit.dto.UserLogin;
+import com.example.habit.dto.UserDto;
+import com.example.habit.dto.LoginDto;
 import com.example.habit.entity.User;
 import com.example.habit.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping("register")
     @Operation(summary = "用户注册")
     @ApiResponse(description = "返回用户信息")
-    public SaResult register(@RequestBody UserInfo info) {
+    public SaResult register(@RequestBody UserDto info) {
         log.debug(String.format("%s: %s", Utils.getFun(), info));
         User user = userService.register(info);
         return SaResult.data(user);
@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("login")
     @Operation(summary = "用户登录")
     @ApiResponse(description = "返回Token信息")
-    public SaResult doLogin(@RequestBody UserLogin login) {
+    public SaResult doLogin(@RequestBody LoginDto login) {
         log.debug(String.format("%s: %s", Utils.getFun(), login));
         SaTokenInfo tokenInfo = userService.doLogin(login);
         System.out.println(tokenInfo);

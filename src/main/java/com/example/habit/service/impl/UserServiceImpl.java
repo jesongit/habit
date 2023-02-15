@@ -3,8 +3,8 @@ package com.example.habit.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.example.habit.common.Utils;
-import com.example.habit.dto.UserInfo;
-import com.example.habit.dto.UserLogin;
+import com.example.habit.dto.UserDto;
+import com.example.habit.dto.LoginDto;
 import com.example.habit.entity.User;
 import com.example.habit.exception.ErrorCode;
 import com.example.habit.mapper.UserMapper;
@@ -27,7 +27,7 @@ import java.util.List;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Override
-    public User register(UserInfo info) {
+    public User register(UserDto info) {
 
         String username = info.getUsername();
 
@@ -44,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public SaTokenInfo doLogin(UserLogin login) {
+    public SaTokenInfo doLogin(LoginDto login) {
 
         String username = login.getUsername();
         String password = login.getPassword();

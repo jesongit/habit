@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.example.habit.common.Utils;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -16,10 +17,11 @@ import lombok.Setter;
  * @author posase
  * @since 2023-02-14
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @TableName("t_habit")
-@Schema(name = "Habit", description = "$!{table.comment}")
+@Schema(name = "Habit", description = "习惯")
 public class Habit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,9 +30,11 @@ public class Habit implements Serializable {
     @TableId(value = "uid", type = IdType.ASSIGN_UUID)
     private String uid;
 
+    @NonNull
     @Schema(description = "用户id")
     private Long userId;
 
+    @NonNull
     @Schema(description = "习惯名字")
     private String name;
 
@@ -41,7 +45,7 @@ public class Habit implements Serializable {
     private Integer record;
 
     @Schema(description = "打卡日期")
-    private Integer recordTime;
+    private LocalDateTime recordTime;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -50,4 +54,9 @@ public class Habit implements Serializable {
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    public void check_in(int day, boolean serial) {
+        this.record = Utils.bit_set(record, day);
+        this.serialDay = serial ? this.serialDay + 1 : 0;
+    }
 }

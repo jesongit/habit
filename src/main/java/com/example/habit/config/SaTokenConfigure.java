@@ -24,13 +24,12 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .notMatch("/user/login")
                             .notMatch("/user/register")  // 忽略登录
                             .notMatch("/api")
+                            .notMatch("/img/**")
                             .notMatch("/swagger-ui/**")   // Swagger
                             .notMatch("/v3/api-docs/**")  // OpenAPI
 //                            .check(r -> StpUtil.checkLogin());     // 都要登录
                             .check(r -> System.out.println(r));
 
-                    SaRouter.match("/room/**")
-                            .check(r -> StpUtil.checkRole("vip"));
                 }).isAnnotation(false)                             // 关闭注解拦截
                 ).addPathPatterns("/**");
     }

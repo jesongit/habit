@@ -2,29 +2,28 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.habit.mapper.HabitMapper">
+<mapper namespace="com.example.habit.mapper.NoteMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.habit.entity.Habit">
+    <resultMap id="BaseResultMap" type="com.example.habit.entity.Note">
             <id property="uid" column="uid" jdbcType="CHAR"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="serialDay" column="serial_day" jdbcType="INTEGER"/>
-            <result property="record" column="record" jdbcType="INTEGER"/>
-            <result property="recordTime" column="record_time" jdbcType="TIMESTAMP"/>
+            <result property="images" column="images" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="likeList" column="like_list" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        uid,user_id,name,
-        serial_day,record,record_time,
-        create_time,update_time
+        uid,user_id,images,
+        content,like_list,create_time,
+        update_time
     </sql>
     <select id="selectByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from t_habit
+        from t_note
         where
-        user_id = #{userId}
+        user_id = #{userId,jdbcType=BIGINT}
     </select>
 </mapper>

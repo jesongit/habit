@@ -1,8 +1,8 @@
 package com.example.habit.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.example.habit.dto.UserInfo;
-import com.example.habit.dto.UserLogin;
+import com.example.habit.dto.UserDto;
+import com.example.habit.dto.LoginDto;
 import com.example.habit.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,9 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
-    User register(UserInfo info);
+    User register(UserDto info);
 
-    SaTokenInfo doLogin(UserLogin login);
+    SaTokenInfo doLogin(LoginDto login);
 
     void doLogout();
 }

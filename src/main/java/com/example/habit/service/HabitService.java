@@ -17,5 +17,5 @@ public interface HabitService extends IService<Habit> {
 
     List<Habit> getHabitList(Long userId);
 
-    void checkIn(String uid);
+    Habit checkIn(String uid);
 }

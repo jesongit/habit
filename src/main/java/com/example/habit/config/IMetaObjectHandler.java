@@ -12,8 +12,9 @@ public class IMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "createTime",
                 () -> LocalDateTime.now(), LocalDateTime.class); // 起始版本 3.3.3(推荐)
-        this.strictUpdateFill(metaObject, "updateTime",
-                () -> LocalDateTime.now(), LocalDateTime.class); // 起始版本 3.3.3(推荐)
+        this.strictInsertFill(metaObject, "updateTime",
+                () -> LocalDateTime.now(), LocalDateTime.class);
+        this.strictInsertFill(metaObject, "likeList", () -> "[]", String.class);
     }
 
     @Override
