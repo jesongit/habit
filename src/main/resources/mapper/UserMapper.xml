@@ -9,7 +9,9 @@
             <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
             <result property="email" column="email" jdbcType="VARCHAR"/>
             <result property="vipLevel" column="vip_level" jdbcType="INTEGER"/>
+            <result property="vipTime" column="vip_time" jdbcType="TIMESTAMP"/>
             <result property="points" column="points" jdbcType="BIGINT"/>
+            <result property="signInTime" column="sing_in_time" jdbcType="TIMESTAMP"/>
             <result property="serialSign" column="serial_sign" jdbcType="INTEGER"/>
             <result property="totalSign" column="total_sign" jdbcType="INTEGER"/>
             <result property="username" column="username" jdbcType="VARCHAR"/>
@@ -21,9 +23,9 @@
 
     <sql id="Base_Column_List">
         id,nickname,email,
-        vip_level,points,serial_sign,
-        total_sign,username,password,
-        picture,create_time,update_time
+        vip_level,points,sign_in_time,
+        serial_sign,total_sign,username,
+        password,picture,create_time,update_time
     </sql>
     <select id="selectByUsername" resultMap="BaseResultMap">
         select

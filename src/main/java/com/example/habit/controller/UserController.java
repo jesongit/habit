@@ -3,6 +3,7 @@ package com.example.habit.controller;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import cn.hutool.core.util.StrUtil;
 import com.example.habit.common.Utils;
 import com.example.habit.dto.UserDto;
 import com.example.habit.dto.LoginDto;
@@ -67,4 +68,23 @@ public class UserController {
         return SaResult.data(user);
     }
 
+    @GetMapping("signin")
+    @Operation(summary = "签到")
+    @ApiResponse(description = "返回签到积分")
+    public SaResult signIn() {
+        Long userId = StpUtil.getLoginIdAsLong();
+        log.debug(StrUtil.format("{}> userId: {}", Utils.getLine(), userId));
+        User user = userService.signIn(userId);
+        return SaResult.data(user.getPoints());
+    }
+
+    @GetMapping("covert")
+    @Operation(summary = "积分兑换会员")
+    @ApiResponse(description = "返回会员过期时间")
+    public SaResult covert(@RequestParam long points) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        log.debug(StrUtil.format("{}> userId: {}", Utils.getLine(), userId));
+        User user = userService.covert(points);
+        return SaResult.data(user.getVipTime());
+    }
 }

@@ -40,8 +40,14 @@ public class User implements Serializable {
     @Schema(description = "会员等级")
     private Integer vipLevel;
 
+    @Schema(description = "会员到期时间")
+    private LocalDateTime vipTime;
+
     @Schema(description = "积分")
     private Long points;
+
+    @Schema(description = "签到时间")
+    private LocalDateTime signInTime;
 
     @Schema(description = "连续签到天数")
     private Integer serialSign;
@@ -65,4 +71,10 @@ public class User implements Serializable {
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    public void signIn(boolean serial) {
+        this.points += 1;
+        this.totalSign += 1;
+        this.serialSign += serial ? 1 : 0;
+    }
 }

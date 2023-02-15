@@ -21,4 +21,8 @@ public interface UserService extends IService<User> {
     SaTokenInfo doLogin(LoginDto login);
 
     void doLogout();
+
+    User signIn(Long userId);
+
+    User covert(long points);
 }

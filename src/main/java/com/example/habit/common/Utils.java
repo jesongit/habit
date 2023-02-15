@@ -19,7 +19,7 @@ import java.io.IOException;
 public class Utils {
 
     private final static String key = "LD4pMdPI9R0ruBK";
-    private final static String basePath = "static/img/";
+    private final static String basePath = "static/img";
 
     // RAS 加密
     public static String encrypt(String password) {
@@ -78,7 +78,7 @@ public class Utils {
     public static File save_img(MultipartFile file) {
         try {
             String filename = String.format("%s.%s", IdUtil.simpleUUID(), FileUtil.getSuffix(file.getOriginalFilename()));
-            String path = ResourceUtils.getURL("classpath:").getPath() + basePath;
+            String path = getResourcePath() + basePath;
 
             File save_file = new File(path, filename);
             file.transferTo(save_file);
@@ -91,10 +91,14 @@ public class Utils {
         }
     }
 
+    public static String getResourcePath() {
+        return StrUtil.format("{}{}src{}main{}resources{}",
+                System.getProperty("user.dir"), File.separatorChar,
+                File.separatorChar, File.separatorChar, File.separatorChar);
+    }
+
     public static void main(String[] args) {
-        int ans = 0;
-        ans = bit_set(ans, 1);
-        ans = bit_set(ans, 2);
-        print_bit(ans);
+        System.out.println(File.separatorChar);
+        System.out.println(getResourcePath());
     }
 }

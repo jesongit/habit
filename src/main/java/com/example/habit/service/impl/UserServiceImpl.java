@@ -2,6 +2,7 @@ package com.example.habit.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import com.example.habit.common.Utils;
 import com.example.habit.dto.UserDto;
 import com.example.habit.dto.LoginDto;
@@ -11,8 +12,12 @@ import com.example.habit.mapper.UserMapper;
 import com.example.habit.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
@@ -64,5 +69,42 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void doLogout() {
         StpUtil.logout();
+    }
+
+    @Override
+    public User signIn(Long userId) {
+        User user = baseMapper.selectById(userId);
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime time = user.getSignInTime();
+        Utils.iAssert(!LocalDateTimeUtil.isSameDay(now, time), ErrorCode.SIGN_IN_REPEAT);
+
+        LocalDateTime yesterday = LocalDateTimeUtil.offset(now, -1, ChronoUnit.DAYS);
+        boolean serial = LocalDateTimeUtil.isSameDay(time, yesterday);
+        user.signIn(serial);
+        baseMapper.updateById(user);
+
+        return user;
+    }
+
+    @Override
+    public User covert(long points) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        User user = baseMapper.selectById(userId);
+
+        Long myPoints = user.getPoints();
+        Utils.iAssert(myPoints >= points, ErrorCode.POINTS_LACK);
+
+        user.setPoints(myPoints - points);
+        user.setVipLevel(1);
+
+        LocalDateTime time = user.getVipTime();
+        LocalDateTime now = LocalDateTime.now();
+        time = time != null && time.isAfter(now) ? time : now;
+        user.setVipTime(LocalDateTimeUtil.offset(time, points, ChronoUnit.DAYS));
+
+        baseMapper.updateById(user);
+
+        return user;
     }
 }
