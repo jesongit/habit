@@ -5,6 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import cn.hutool.core.util.StrUtil;
 import com.example.habit.common.Utils;
+import com.example.habit.common.enums.ErrorCode;
 import com.example.habit.dto.UserDto;
 import com.example.habit.dto.LoginDto;
 import com.example.habit.entity.User;
@@ -81,10 +82,13 @@ public class UserController {
     @GetMapping("covert")
     @Operation(summary = "积分兑换会员")
     @ApiResponse(description = "返回会员过期时间")
-    public SaResult covert(@RequestParam long points) {
+    public SaResult covert(@RequestParam int count) {
+        Utils.iAssert(count > 0, ErrorCode.POINTS_LACK);
+
         Long userId = StpUtil.getLoginIdAsLong();
         log.debug(StrUtil.format("{}> userId: {}", Utils.getLine(), userId));
-        User user = userService.covert(points);
+
+        User user = userService.covert(count);
         return SaResult.data(user.getVipTime());
     }
 }

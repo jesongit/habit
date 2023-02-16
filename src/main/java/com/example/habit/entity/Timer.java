@@ -3,6 +3,8 @@ package com.example.habit.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,6 +25,7 @@ import lombok.*;
 @Schema(name = "Timer", description = "计时器")
 public class Timer implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "uid")
@@ -32,6 +35,13 @@ public class Timer implements Serializable {
     @NonNull
     @Schema(description = "用户id")
     private Long userId;
+
+    @NonNull
+    @Schema(description = "习惯名字")
+    private String name;
+
+    @Schema(description = "习惯描述")
+    private String descr;
 
     @NonNull
     @Schema(description = "开始时间")

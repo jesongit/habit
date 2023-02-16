@@ -1,4 +1,4 @@
-package com.example.habit.exception;
+package com.example.habit.common.exception;
 
 import cn.dev33.satoken.exception.*;
 import cn.dev33.satoken.util.SaResult;

@@ -7,15 +7,13 @@ import com.example.habit.common.Utils;
 import com.example.habit.dto.UserDto;
 import com.example.habit.dto.LoginDto;
 import com.example.habit.entity.User;
-import com.example.habit.exception.ErrorCode;
+import com.example.habit.common.enums.ErrorCode;
 import com.example.habit.mapper.UserMapper;
 import com.example.habit.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -88,20 +86,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User covert(long points) {
+    public User covert(int count) {
         Long userId = StpUtil.getLoginIdAsLong();
         User user = baseMapper.selectById(userId);
 
+        Long cost = count * 100L;
         Long myPoints = user.getPoints();
-        Utils.iAssert(myPoints >= points, ErrorCode.POINTS_LACK);
+        Utils.iAssert(myPoints >= cost, ErrorCode.POINTS_LACK);
 
-        user.setPoints(myPoints - points);
+        user.delPoint(cost);
         user.setVipLevel(1);
 
         LocalDateTime time = user.getVipTime();
         LocalDateTime now = LocalDateTime.now();
         time = time != null && time.isAfter(now) ? time : now;
-        user.setVipTime(LocalDateTimeUtil.offset(time, points, ChronoUnit.DAYS));
+        user.setVipTime(LocalDateTimeUtil.offset(time, count, ChronoUnit.MONTHS));
 
         baseMapper.updateById(user);
 

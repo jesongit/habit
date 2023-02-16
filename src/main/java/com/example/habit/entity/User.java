@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,6 +27,7 @@ import lombok.NoArgsConstructor;
 @Schema(name = "User", description = "用户")
 public class User implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户id")
@@ -73,8 +76,18 @@ public class User implements Serializable {
     private LocalDateTime updateTime;
 
     public void signIn(boolean serial) {
-        this.points += 1;
         this.totalSign += 1;
         this.serialSign += serial ? 1 : 0;
+        addPoint();
     }
+
+    public void addPoint() {
+        this.points += 50;
+    }
+
+    public void delPoint(long points) {
+        this.points -= points;
+    }
+
+
 }

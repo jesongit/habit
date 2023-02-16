@@ -1,4 +1,4 @@
-package com.example.habit.exception;
+package com.example.habit.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +13,7 @@ public enum ErrorCode {
 
     HABIT_NO_FOUND(2001, "习惯不存在"),
     CHECK_IN_REPEAT(2002, "重复打卡"),
+    HABIT_VALID(2003, "习惯验证失败"),
 
     NOTE_IMG_ERROR(3001, "图片上传失败"),
     CONTEXT_VALID(3002, "内容为空"),
@@ -20,6 +21,6 @@ public enum ErrorCode {
     NOTE_LIKE_VALID(3004, "不能点赞自己或已经点赞"),
     ;
 
-    private long code;
-    private String message;
+    private final long code;
+    private final String message;
 }

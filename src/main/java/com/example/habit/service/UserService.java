@@ -24,5 +24,5 @@ public interface UserService extends IService<User> {
 
     User signIn(Long userId);
 
-    User covert(long points);
+    User covert(int count);
 }

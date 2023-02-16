@@ -7,13 +7,15 @@
     <resultMap id="BaseResultMap" type="com.example.habit.entity.Timer">
             <id property="uid" column="uid" jdbcType="CHAR"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="descr" column="descr" jdbcType="VARCHAR"/>
             <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
             <result property="duration" column="duration" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        uid,user_id,start_time,
-        duration
+        uid,user_id,name,descr,
+        start_time,duration
     </sql>
     <select id="selectByUserId" resultMap="BaseResultMap">
         select

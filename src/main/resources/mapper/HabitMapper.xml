@@ -7,7 +7,9 @@
     <resultMap id="BaseResultMap" type="com.example.habit.entity.Habit">
             <id property="uid" column="uid" jdbcType="CHAR"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="descr" column="descr" jdbcType="VARCHAR"/>
             <result property="serialDay" column="serial_day" jdbcType="INTEGER"/>
             <result property="record" column="record" jdbcType="INTEGER"/>
             <result property="recordTime" column="record_time" jdbcType="TIMESTAMP"/>
@@ -16,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        uid,user_id,name,
+        uid,user_id,name,descr,
         serial_day,record,record_time,
         create_time,update_time
     </sql>

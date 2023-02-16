@@ -1,5 +1,6 @@
 package com.example.habit.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.example.habit.entity.Timer;
@@ -26,6 +27,7 @@ public class TimerController {
     @Autowired
     TimerService timerService;
 
+    @SaCheckRole("vip")
     @GetMapping("list")
     @Operation(summary = "获取计时器记录")
     @ApiResponse(description = "返回记录列表")
@@ -38,9 +40,10 @@ public class TimerController {
     @Operation(summary = "添加计时器记录")
     @ApiResponse(description = "返回计时器记录")
     public SaResult add(@RequestParam LocalDateTime startTime,
-                        @RequestParam int duration) {
+                        @RequestParam int duration,
+                        @RequestParam String name) {
         Long userId = StpUtil.getLoginIdAsLong();
-        Timer timer = new Timer(userId, startTime, duration);
+        Timer timer = new Timer(userId, name, startTime, duration);
         timerService.save(timer);
         return SaResult.data(timer);
     }

@@ -1,15 +1,12 @@
 package com.example.habit.common;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
-import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.example.habit.exception.ApiException;
-import com.example.habit.exception.ErrorCode;
-import lombok.extern.flogger.Flogger;
+import com.example.habit.common.exception.ApiException;
+import com.example.habit.common.enums.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
